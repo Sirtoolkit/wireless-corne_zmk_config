@@ -81,18 +81,18 @@
 
         // ----------------------------------------------------------------
         // Layer 2: RAISE (Symbols + F-keys on left side)
-        // F-keys start from home row: A=F1, S=F2, D=F3, F=F4, G=F5, etc.
+        // F1-F5 on home row (A-G), F6-F10 on bottom row (Z-B), F11-F12 on thumbs
         // ----------------------------------------------------------------
         raise_layer {
             bindings = <
 // ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐      ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
-    &kp TILDE &kp F7    &kp F8    &kp F9    &kp F10   &kp F11            &kp CARET &kp AMPS  &kp ASTRK &kp LPAR  &kp RPAR  &kp DEL
+    &kp TILDE &kp EXCL  &kp AT    &kp HASH  &kp DLLR  &kp PRCNT          &kp CARET &kp AMPS  &kp ASTRK &kp LPAR  &kp RPAR  &kp DEL
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
     &trans    &kp F1    &kp F2    &kp F3    &kp F4    &kp F5             &kp MINUS &kp EQUAL &kp LBKT  &kp RBKT  &kp BSLH  &kp GRAVE
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-    &trans    &trans    &trans    &trans    &kp F6    &kp F12            &kp UNDER &kp PLUS  &kp LBRC  &kp RBRC  &kp PIPE  &kp TILDE
+    &trans    &kp F6    &kp F7    &kp F8    &kp F9    &kp F10            &kp UNDER &kp PLUS  &kp LBRC  &kp RBRC  &kp PIPE  &kp TILDE
 // └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                                  &trans    &mo 3     &trans             &trans    &trans    &trans
+                                  &kp F11   &mo 3     &kp F12            &trans    &trans    &trans
 //                               └─────────┴─────────┴─────────┘      └─────────┴─────────┴─────────┘
             >;
         };
