@@ -45,6 +45,14 @@
         };
     };
 
+    macros {
+        exit_as_space: exit_autoshift_space {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&to 0 &kp SPACE>;
+        };
+    };
+
     combos {
         compatible = "zmk,combos";
         
@@ -108,7 +116,7 @@
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
     &kp GRAVE &kp EXCL  &kp AT    &kp HASH  &kp DLLR  &kp PRCNT         &kp CARET &kp AMPS  &kp ASTRK &kp LPAR  &kp RPAR  &kp TILDE
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-  &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2  &trans    &trans    &trans   &kp UNDER &kp PLUS  &kp LBRC  &kp RBRC  &kp PIPE     
+    &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2  &trans  &trans   &trans   &kp UNDER &kp PLUS  &kp LBRC  &kp RBRC  &kp PIPE     
 // └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
                                   &kp LGUI     &trans  &kp SPACE        &kp RET  &trans   &kp RALT
 //                               └─────────┴─────────┴─────────┘      └─────────┴─────────┴─────────┘
@@ -147,7 +155,7 @@
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
     &to 0     &kp LS(Z) &kp LS(X) &kp LS(C) &kp LS(V) &kp LS(B)          &kp LS(N) &kp LS(M) &to 0     &to 0     &to 0     &to 0
 // └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                                  &to 0     &to 0     &to 0              &to 0     &to 0     &to 0
+                                  &to 0     &to 0     &exit_as_space     &to 0     &to 0     &to 0
 //                               └─────────┴─────────┴─────────┘      └─────────┴─────────┴─────────┘
             >;
         };
