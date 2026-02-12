@@ -62,12 +62,12 @@
             bindings = <&kp ESC>;
         };
         
-        // Combo: F + J (home row shifts) = Sticky Auto-shift Layer
-        // Activates auto-shift temporarily, deactivates after next keypress
+        // Combo: F + J (home row shifts) = Toggle Auto-shift Layer
+        // Activates auto-shift, stays on until you press a non-letter key
         combo_autoshift {
             timeout-ms = <50>;
             key-positions = <16 19>;
-            bindings = <&sl 4>;
+            bindings = <&tog 3>;
         };
         
         // Combo: Both physical shifts (corners) = CAPS_WORD
@@ -134,20 +134,20 @@
         };
 
         // ----------------------------------------------------------------
-        // Layer 4: AUTO-SHIFT LAYER (activated by F+J combo)
+        // Layer 3: AUTO-SHIFT LAYER (activated by F+J combo)
         // All letters are UPPERCASE - just tap them normally
-        // Sticky layer: activates temporarily, deactivates after any keypress
+        // Any non-letter key deactivates the layer and returns to base
         // ----------------------------------------------------------------
         autoshift_layer {
             bindings = <
 // ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐      ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
-    &kp TAB   &kp LS(Q) &kp LS(W) &kp LS(E) &kp LS(R) &kp LS(T)          &kp LS(Y) &kp LS(U) &kp LS(I) &kp LS(O) &kp LS(P) &kp BSPC
+    &to 0     &kp LS(Q) &kp LS(W) &kp LS(E) &kp LS(R) &kp LS(T)          &kp LS(Y) &kp LS(U) &kp LS(I) &kp LS(O) &kp LS(P) &to 0
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-    &kp ESC   &kp LS(A) &kp LS(S) &kp LS(D) &kp LS(F) &kp LS(G)          &kp LS(H) &kp LS(J) &kp LS(K) &kp LS(L) &kp LS(SEMI) &kp SQT
+    &to 0     &kp LS(A) &kp LS(S) &kp LS(D) &kp LS(F) &kp LS(G)          &kp LS(H) &kp LS(J) &kp LS(K) &kp LS(L) &kp LS(SEMI) &to 0
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-    &kp LSHFT &kp LS(Z) &kp LS(X) &kp LS(C) &kp LS(V) &kp LS(B)          &kp LS(N) &kp LS(M) &kp COMMA &kp DOT   &kp FSLH  &kp RSHFT
+    &to 0     &kp LS(Z) &kp LS(X) &kp LS(C) &kp LS(V) &kp LS(B)          &kp LS(N) &kp LS(M) &to 0     &to 0     &to 0     &to 0
 // └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                                  &kp LGUI  &mo 1     &kp SPACE          &kp RET   &mo 2     &kp RALT
+                                  &to 0     &to 0     &to 0              &to 0     &to 0     &to 0
 //                               └─────────┴─────────┴─────────┘      └─────────┴─────────┴─────────┘
             >;
         };
