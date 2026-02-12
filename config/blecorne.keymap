@@ -44,7 +44,22 @@
 
     combos {
         compatible = "zmk,combos";
-        // Combo for CAPS_WORD (both shifts together)
+        
+        // Combo: E + R = TAB
+        combo_tab {
+            timeout-ms = <50>;
+            key-positions = <3 4>;
+            bindings = <&kp TAB>;
+        };
+        
+        // Combo: U + I = ESC
+        combo_esc {
+            timeout-ms = <50>;
+            key-positions = <7 8>;
+            bindings = <&kp ESC>;
+        };
+        
+        // Combo: Both shifts = CAPS_WORD
         combo_caps {
             timeout-ms = <50>;
             key-positions = <24 35>;
