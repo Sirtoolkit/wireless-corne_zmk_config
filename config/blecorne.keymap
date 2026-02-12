@@ -13,11 +13,6 @@
 #include "layout/autoshift.dtsi"
 
 / {
-    combos {
-        compatible = "zmk,combos";
-        #include "layout/combos.dtsi"
-    };
-
     behaviors {
         #include "layout/specialkeys.dtsi"
     };
