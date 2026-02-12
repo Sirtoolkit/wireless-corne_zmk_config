@@ -30,6 +30,16 @@
             flavor = "balanced";
             bindings = <&kp>, <&kp>;
         };
+
+        // Auto-shift behavior: tap = normal, hold = shifted
+        as: auto_shift {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <175>;
+            quick-tap-ms = <0>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&kp>;
+        };
     };
 
     combos {
@@ -46,16 +56,17 @@
         compatible = "zmk,keymap";
 
         // ----------------------------------------------------------------
-        // Layer 0: BASE (QWERTY with Home Row Mods)
+        // Layer 0: BASE (QWERTY with Home Row Mods + Auto-shift)
+        // Auto-shift: Hold any letter for 175ms to get uppercase
         // ----------------------------------------------------------------
         default_layer {
             bindings = <
 // ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐      ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
-    &kp TAB   &kp Q     &kp W     &kp E     &kp R     &kp T              &kp Y     &kp U     &kp I     &kp O     &kp P     &kp BSPC
+    &kp TAB   &as LS(Q) Q &as LS(W) W &as LS(E) E &as LS(R) R &as LS(T) T    &as LS(Y) Y &as LS(U) U &as LS(I) I &as LS(O) O &as LS(P) P &kp BSPC
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-    &kp ESC   &hm LGUI A &hm LALT S &hm LCTRL D &hm LSHFT F &kp G        &kp H     &hm RSHFT J &hm RCTRL K &hm RALT L &hm RGUI SEMI &kp SQT
+    &kp ESC   &hm LGUI A &hm LALT S &hm LCTRL D &hm LSHFT F &as LS(G) G    &as LS(H) H &hm RSHFT J &hm RCTRL K &hm RALT L &hm RGUI SEMI &kp SQT
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-    &kp LSHFT &kp Z     &kp X     &kp C     &kp V     &kp B              &kp N     &kp M     &kp COMMA &kp DOT   &kp FSLH  &kp RSHFT
+    &kp LSHFT &as LS(Z) Z &as LS(X) X &as LS(C) C &as LS(V) V &as LS(B) B    &as LS(N) N &as LS(M) M &kp COMMA &kp DOT   &kp FSLH  &kp RSHFT
 // └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
                                   &kp LGUI  &mo 1     &kp SPACE          &kp RET   &mo 2     &kp RALT
 //                               └─────────┴─────────┴─────────┘      └─────────┴─────────┴─────────┘
