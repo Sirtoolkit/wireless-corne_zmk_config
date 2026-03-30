@@ -115,7 +115,7 @@
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
     &hyper_esc LC(LS(LA(LG(SPACE)))) ESC  &hm LGUI A &hm LALT S &hm LCTRL D &hm LSHFT F &kp G        &kp H     &hm RSHFT J &hm RCTRL K &hm RALT L &hm RGUI SEMI &kp SQT
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-    &kp LSHFT &kp Z     &kp X     &kp C     &kp V     &kp B              &kp N     &kp M     &kp COMMA &kp DOT   &kp FSLH  &kp RSHFT
+    &kp LC(A) &kp Z     &kp X     &kp C     &kp V     &kp B              &kp N     &kp M     &kp COMMA &kp DOT   &kp FSLH  &kp RSHFT
 // └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
                            &kp LGUI  &mo 1     &kp SPACE          &kp RET   &mo 2     &kp RALT
             >;
