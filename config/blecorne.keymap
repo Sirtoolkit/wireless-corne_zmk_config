@@ -52,30 +52,30 @@
             bindings = <&to 0 &kp SPACE>;
         };
 
-        exit_as_bspc: exit_autoshift_bspc {
+        exit_as_esc: exit_autoshift_esc {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&to 0 &kp BSPC>;
+            bindings = <&to 0 &kp ESC>;
         };
     };
 
     combos {
         compatible = "zmk,combos";
-        
+
         // Combo: E + R = TAB
         combo_tab {
             timeout-ms = <50>;
             key-positions = <3 4>;
             bindings = <&kp TAB>;
         };
-        
+
         // Combo: U + I = ESC
         combo_esc {
             timeout-ms = <50>;
             key-positions = <7 8>;
             bindings = <&kp ESC>;
         };
-        
+
         // Combo: F + J (home row shifts) = Toggle Auto-shift Layer
         // Activates auto-shift, stays on until you press a non-letter key
         combo_autoshift {
@@ -102,13 +102,12 @@
             bindings = <
 // ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐      ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
     &kp TAB   &kp Q     &kp W     &kp E     &kp R     &kp T              &kp Y     &kp U     &kp I     &kp O     &kp P     &kp BSPC
-// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-    &kp ESC   &hm LGUI A &hm LALT S &hm LCTRL D &hm LSHFT F &kp G        &kp H     &hm RSHFT J &hm RCTRL K &hm RALT L &hm RGUI SEMI &kp SQT
+//  AQUÍ ESTÁ EL CAMBIO (Posición Caps Lock) ↓
+    &mt LC(LS(LA(LGUI))) ESC  &hm LGUI A &hm LALT S &hm LCTRL D &hm LSHFT F &kp G        &kp H     &hm RSHFT J &hm RCTRL K &hm RALT L &hm RGUI SEMI &kp SQT
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
     &kp LSHFT &kp Z     &kp X     &kp C     &kp V     &kp B              &kp N     &kp M     &kp COMMA &kp DOT   &kp FSLH  &kp RSHFT
 // └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                                  &kp LGUI  &mo 1     &kp SPACE          &kp RET   &mo 2     &kp RALT
-//                               └─────────┴─────────┴─────────┘      └─────────┴─────────┴─────────┘
+                           &kp LGUI  &mo 1     &kp SPACE          &kp RET   &mo 2     &kp RALT
             >;
         };
 
@@ -155,13 +154,13 @@
         autoshift_layer {
             bindings = <
 // ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐      ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
-    &to 0     &kp LS(Q) &kp LS(W) &kp LS(E) &kp LS(R) &kp LS(T)          &kp LS(Y) &kp LS(U) &kp LS(I) &kp LS(O) &kp LS(P) &exit_as_bspc
+    &trans       &kp LS(Q) &kp LS(W) &kp LS(E) &kp LS(R) &kp LS(T)          &kp LS(Y) &kp LS(U) &kp LS(I) &kp LS(O) &kp LS(P) &trans
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-    &to 0     &kp LS(A) &kp LS(S) &kp LS(D) &kp LS(F) &kp LS(G)          &kp LS(H) &kp LS(J) &kp LS(K) &kp LS(L) &kp LS(SEMI) &to 0
+    &exit_as_esc &kp LS(A) &kp LS(S) &kp LS(D) &kp LS(F) &kp LS(G)          &kp LS(H) &kp LS(J) &kp LS(K) &kp LS(L) &kp LS(SEMI) &trans
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-    &to 0     &kp LS(Z) &kp LS(X) &kp LS(C) &kp LS(V) &kp LS(B)          &kp LS(N) &kp LS(M) &to 0     &to 0     &to 0     &to 0
+    &trans       &kp LS(Z) &kp LS(X) &kp LS(C) &kp LS(V) &kp LS(B)          &kp LS(N) &kp LS(M) &trans    &trans    &trans    &trans
 // └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                                  &to 0     &to 0     &exit_as_space     &to 0     &to 0     &to 0
+                                  &trans    &trans    &exit_as_space     &trans    &trans    &trans
 //                               └─────────┴─────────┴─────────┘      └─────────┴─────────┴─────────┘
             >;
         };
