@@ -1,33 +1,31 @@
+
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
-#include <dt-bindings/zmk/mouse.h>
 #include <dt-bindings/zmk/ext_power.h>
 #include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/backlight.h>
 #include <dt-bindings/zmk/rgb.h>
 
-// Helper macro to create an Autoshift version of a key
-#define AS(keycode) &as LS(keycode) keycode
+// Definición de Hyper (Cmd+Alt+Ctrl+Shift)
+#define HYP(key) LS(LC(LA(LGUI)))
 
-// Layers definitions
+// Capas
 #define L_QWT 0
 #define L_NAV 1
 #define L_NUM 2
 #define L_SYM 3
 #define L_MED 4
-#define L_MOU 5
-#define L_FUN 6
-#define L_SYS 7
-#define L_SFT 8
+#define L_FUN 5
+#define L_SYS 6
+#define L_SFT 7
 
-/ {
+{
     chosen {
         zmk,physical-layout = &foostan_corne_6col_layout;
     };
 
     behaviors {
-        // Home row mods configuration
         hm: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -38,13 +36,21 @@
             bindings = <&kp>, <&kp>;
         };
 
-        // Auto-shift behavior: tap = normal, hold = shifted
         as: auto_shift {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <200>;
             quick-tap-ms = <200>;
             flavor = "tap-preferred";
+            bindings = <&kp>, <&kp>;
+        };
+
+        // Comportamiento Hyper-Space: Tap para Espacio, Hold para Hyper
+        hspc: hyper_space {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            flavor = "balanced";
             bindings = <&kp>, <&kp>;
         };
     };
@@ -55,7 +61,6 @@
             #binding-cells = <0>;
             bindings = <&to L_QWT &kp SPACE>;
         };
-
         exit_as_esc: exit_autoshift_esc {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -66,76 +71,82 @@
     combos {
         compatible = "zmk,combos";
 
-        // Combo: E + R = TAB
-        combo_tab {
-            timeout-ms = <50>;
-            key-positions = <3 4>;
-            bindings = <&kp TAB>;
-        };
+        // --- Combos Activos ---
+        combo_tab { timeout-ms = <50>; key-positions = <3 4>; bindings = <&kp TAB>; };
+        combo_esc { timeout-ms = <50>; key-positions = <7 8>; bindings = <&kp ESC>; };
+        combo_autoshift { timeout-ms = <50>; key-positions = <16 19>; bindings = <&tog L_SFT>; };
+        combo_caps { timeout-ms = <50>; key-positions = <24 35>; bindings = <&caps_word>; };
 
-        // Combo: U + I = ESC
-        combo_esc {
-            timeout-ms = <50>;
-            key-positions = <7 8>;
-            bindings = <&kp ESC>;
-        };
-
-        // Combo: F + J (home row shifts) = Toggle Auto-shift Layer
-        // Activates auto-shift, stays on until you press a non-letter key
-        combo_autoshift {
-            timeout-ms = <50>;
-            key-positions = <16 19>;
-            bindings = <&tog L_SFT>;
-        };
+        // --- Combos Sugeridos (Descomenta para usar) ---
         
-        // Combo: Both physical shifts (corners) = CAPS_WORD
-        combo_caps {
+        /* // J + K = ENTER (Muy popular para no mover el pulgar)
+        combo_enter {
             timeout-ms = <50>;
-            key-positions = <24 35>;
-            bindings = <&caps_word>;
+            key-positions = <19 20>;
+            bindings = <&kp RET>;
         };
+
+        // K + L = BACKSPACE
+        combo_bspc {
+            timeout-ms = <50>;
+            key-positions = <20 21>;
+            bindings = <&kp BSPC>;
+        };
+
+        // D + F = DELETE
+        combo_del {
+            timeout-ms = <50>;
+            key-positions = <15 16>;
+            bindings = <&kp DEL>;
+        };
+
+        // X + C = COPY (Atajo rápido en fila inferior)
+        combo_copy {
+            timeout-ms = <50>;
+            key-positions = <26 27>;
+            bindings = <&kp LG(C)>;
+        };
+
+        // C + V = PASTE
+        combo_paste {
+            timeout-ms = <50>;
+            key-positions = <27 28>;
+            bindings = <&kp LG(V)>;
+        };
+        */
     };
 
     keymap {
         compatible = "zmk,keymap";
 
-        // ----------------------------------------------------------------
-        // Layer 0: BASE (QWERTY with Home Row Mods)
-        // ----------------------------------------------------------------
         default_layer {
             display-name = "QWERTY";
             bindings = <
 // ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐      ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
     &kp TAB   &kp Q     &kp W     &kp E     &kp R     &kp T              &kp Y     &kp U     &kp I     &kp O     &kp P     &kp MINUS
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-    &kp GRAVE &hm LGUI A &hm LALT S &hm LCTRL D &hm LSHFT F &kp G        &kp H     &hm RSHFT J &hm RCTRL K &hm RALT L &hm RGUI SEMI &kp SQT
+    &mt LC(LS(LA(LGUI))) ESC &hm LGUI A &hm LALT S &hm LCTRL D &hm LSHFT F &kp G        &kp H     &hm RSHFT J &hm RCTRL K &hm RALT L &hm RGUI SEMI &kp SQT
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
     &kp BSLH  &kp Z     &kp X     &kp C     &kp V     &kp B              &kp N     &kp M     &kp COMMA &kp DOT   &kp FSLH  &hm RGUI EQUAL
 // └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                           &mo L_SYS &lt L_NAV BSPC &lt L_SYM ESC        &lt L_MED RET &lt L_NUM SPACE &mo L_SYS
+                           &mo L_SYS &lt L_NAV BSPC &lt L_SYM ESC        &lt L_MED RET &lt L_NUM SPACE &mo L_FUN
             >;
         };
 
-        // ----------------------------------------------------------------
-        // Layer 1: NAVIGATION
-        // ----------------------------------------------------------------
         nav_layer {
             display-name = "Navigation";
             bindings = <
 // ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐      ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
-    &kp GRAVE &kp LG(N1) &kp LG(N2) &kp LG(N3) &kp LG(N4) &kp LG(N5)     &trans    &trans    &trans    &trans    &trans    &trans
+    &kp LG(TAB)     &kp LG(Q)       &kp LG(W)      &kp LG(E)      &kp LG(R)       &kp LG(T)          &trans    &trans    &trans    &trans    &trans    &trans
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-    &kp TAB   &kp LG(Q)  &kp LG(W)  &kp LG(E)  &kp LG(R)  &kp LG(T)      &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT &trans    &trans
+    &kp LS(LG(TAB)) &hm LCTRL LG(A) &hm LALT LG(S) &hm LGUI LG(D) &hm LSHFT LG(F) &kp LG(G)          &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT &trans    &trans
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-    &kp TILDE &kp LG(Z)  &kp LG(X)  &kp LG(C)  &kp LG(V)  &kp LG(B)      &kp HOME  &kp PG_DN &kp PG_UP &kp END   &trans    &trans
+    &kp LG(TILDE)   &kp LG(Z)       &kp LG(X)      &kp LG(C)      &kp LG(V)       &kp LG(B)          &kp HOME  &kp PG_DN &kp PG_UP &kp END   &trans    &trans
 // └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                                  &trans    &trans    &trans             &kp RET   &kp SPACE &trans
+                                           &trans         &kp LC(UP)     &trans             &kp RET   &kp SPACE &trans
             >;
         };
 
-        // ----------------------------------------------------------------
-        // Layer 2: NUMBERS
-        // ----------------------------------------------------------------
         num_layer {
             display-name = "Numbers";
             bindings = <
@@ -146,110 +157,60 @@
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
     &kp EQUAL &kp LPAR  &kp PLUS  &kp MINUS &kp RPAR  &kp DOT            &trans    &trans    &trans    &trans    &trans    &trans
 // └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                                  &trans    &kp COMMA &kp BSPC           &trans    &trans    &trans
+                                  &trans   &mt DEL BSPC &kp SPACE        &trans    &trans    &trans
             >;
         };
 
-        // ----------------------------------------------------------------
-        // Layer 3: SYMBOLS
-        // ----------------------------------------------------------------
         sym_layer {
             display-name = "Symbols";
             bindings = <
 // ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐      ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
-    &trans    &trans    &trans    &trans    &trans    &trans             &kp QMARK &kp PLUS  &kp MINUS &kp DOT   &kp FSLH  &kp BSLH
+    &trans    &trans    &trans    &trans    &trans    &trans             &kp AMPS  &kp LT    &kp EQUAL &kp GT    &kp PIPE  &kp HASH
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-    &trans    &kp LSHFT &kp LCTRL &kp LALT  &kp LGUI  &trans             &kp AMPS  &kp LT    &kp EQUAL &kp GT    &kp PIPE  &kp HASH
+    &trans    &kp LSHFT &kp LCTRL &kp LALT  &kp LGUI  &trans             &kp LBKT  &kp LPAR  &kp COLON &kp RPAR  &kp RBKT  &kp PRCNT
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-    &trans    &trans    &trans    &trans    &trans    &trans             &kp LBKT  &kp LPAR  &kp COLON &kp RPAR  &kp RBKT  &kp PRCNT
+    &trans    &trans    &trans    &trans    &trans    &trans             &kp DLLR  &kp LBRC  &kp STAR  &kp RBRC  &kp CARET &kp EXCL
 // └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                                  &trans    &trans    &trans             &kp DLLR  &kp LBRC  &kp STAR
+                                  &trans    &trans    &trans             &kp AT    &kp SPACE &trans
             >;
         };
 
-        // ----------------------------------------------------------------
-        // Layer 4: MEDIA
-        // ----------------------------------------------------------------
         media_layer {
             display-name = "Media";
             bindings = <
-// ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐      ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
     &kp C_VOL_UP &kp C_BRI_UP &trans &trans &trans    &trans             &trans    &trans    &trans    &trans    &trans    &trans
-// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
     &kp C_VOL_DN &kp C_BRI_DN &kp C_PREV &kp C_PP &kp C_NEXT &trans      &trans    &kp RSHFT &kp RCTRL &kp RALT  &kp RGUI  &trans
-// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
     &kp C_MUTE &trans   &trans    &trans    &trans    &trans             &trans    &trans    &trans    &trans    &trans    &trans
-// └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
                                   &trans    &trans    &kp C_STOP         &trans    &trans    &trans
             >;
         };
 
-        // ----------------------------------------------------------------
-        // Layer 5: MOUSE
-        // ----------------------------------------------------------------
-        mouse_layer {
-            display-name = "Mouse";
-            bindings = <
-// ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐      ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
-    &trans    &mkp MB4  &mkp MB3  &mkp MB2  &mkp MB1  &mkp MB5           &trans    &trans    &trans    &trans    &trans    &trans
-// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-    &trans    &kp LSHFT &kp LCTRL &kp LALT  &kp LGUI  &trans             &trans    &trans    &trans    &trans    &trans    &trans
-// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-    &trans    &trans    &trans    &trans    &trans    &trans             &trans    &trans    &trans    &trans    &trans    &trans
-// └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                                  &trans    &trans    &trans             &mkp MB2  &mkp MB1  &mkp MB3
-            >;
-        };
-
-        // ----------------------------------------------------------------
-        // Layer 6: FUNCTIONS
-        // ----------------------------------------------------------------
         fun_layer {
             display-name = "Functions";
             bindings = <
-// ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐      ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
     &trans    &kp F11   &kp F12   &kp F13   &kp F14   &kp F15            &trans    &trans    &trans    &trans    &trans    &trans
-// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
     &trans    &kp F6    &kp F7    &kp F8    &kp F9    &kp F10            &trans    &kp RSHFT &kp RCTRL &kp RALT  &kp RGUI  &trans
-// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
     &trans    &kp F1    &kp F2    &kp F3    &kp F4    &kp F5             &trans    &trans    &trans    &trans    &trans    &trans
-// └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
                                   &trans    &trans    &trans             &trans    &trans    &trans
             >;
         };
 
-        // ----------------------------------------------------------------
-        // Layer 7: SYSTEM
-        // ----------------------------------------------------------------
         sys_layer {
             display-name = "System";
             bindings = <
-// ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐      ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
     &bootloader &trans  &trans    &trans    &trans    &trans             &trans    &trans    &trans    &trans    &trans    &bootloader
-// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
     &sys_reset  &trans  &trans    &trans    &trans    &trans             &trans    &trans    &trans    &trans    &trans    &sys_reset
-// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
     &trans      &trans  &trans    &trans    &trans    &kp C_PWR          &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &bt BT_CLR
-// └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
                                   &trans    &trans    &trans             &trans    &trans    &trans
             >;
         };
 
-        // ----------------------------------------------------------------
-        // Layer 8: AUTO-SHIFT LAYER (activated by F+J combo)
-        // All letters are UPPERCASE - just tap them normally
-        // Any non-letter key deactivates the layer and returns to base
-        // ----------------------------------------------------------------
         autoshift_layer {
             display-name = "Auto-Shift";
             bindings = <
-// ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐      ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
     &trans       &kp LS(Q) &kp LS(W) &kp LS(E) &kp LS(R) &kp LS(T)          &kp LS(Y) &kp LS(U) &kp LS(I) &kp LS(O) &kp LS(P) &trans
-// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
     &exit_as_esc &kp LS(A) &kp LS(S) &kp LS(D) &kp LS(F) &kp LS(G)          &kp LS(H) &kp LS(J) &kp LS(K) &kp LS(L) &kp LS(SEMI) &trans
-// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
     &trans       &kp LS(Z) &kp LS(X) &kp LS(C) &kp LS(V) &kp LS(B)          &kp LS(N) &kp LS(M) &trans    &trans    &trans    &trans
-// └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
                                   &trans    &trans    &exit_as_space     &trans    &trans    &trans
             >;
         };
