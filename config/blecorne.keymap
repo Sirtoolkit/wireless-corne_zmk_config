@@ -58,11 +58,11 @@
         // Hold solo: permite repetir Backspace en lugar de entrar a la capa.
         bspcnav: backspace_layer_nav {
             compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <0>;
+            #binding-cells = <2>;
             flavor = "balanced";
             tapping-term-ms = <200>;
             quick-tap-ms = <175>;
-            bindings = <&mo L_NAV &kp BSPC>;
+            bindings = <&mo>, <&kp>;
             hold-trigger-key-positions = <6 7 8 9 10 11 18 19 20 21 22 23 30 31 32 33 34 35 36 37 38 39 40 41>;
             hold-trigger-on-release;
         };
@@ -142,7 +142,7 @@
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
     &kp BSLH  &kp Z     &kp X     &kp C     &kp V     &kp B              &kp N     &kp M     &kp COMMA &kp DOT   &kp FSLH  &hm RGUI EQUAL
 // └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                           &mo L_SYS &bspcnav &lt L_SYM ESC        &lt L_MED RET &lt L_NUM SPACE &mo L_FUN
+                           &mo L_SYS &bspcnav L_NAV BSPC &lt L_SYM ESC        &lt L_MED RET &lt L_NUM SPACE &mo L_FUN
             >;
         };
 
