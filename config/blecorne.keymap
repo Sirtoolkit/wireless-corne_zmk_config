@@ -6,9 +6,8 @@
 #include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/backlight.h>
 #include <dt-bindings/zmk/rgb.h>
-
-// Definición de Hyper (Cmd+Alt+Ctrl+Shift)
-#define HYP(key) LS(LC(LA(LGUI)))
+#include "../zmk-config/config/layout/homerowmods.dtsi"
+#include "../zmk-config/config/layout/specialkeys.dtsi"
 
 // Capas
 #define L_QWT 0
@@ -125,11 +124,11 @@
 // ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐      ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
     &kp TAB   &kp Q     &kp W     &kp E     &kp R     &kp T              &kp Y     &kp U     &kp I     &kp O     &kp P     &kp MINUS
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-    &mt LC(LS(LA(LGUI))) ESC &hm LGUI A &hm LALT S &hm LCTRL D &hm LSHFT F &kp G        &kp H     &hm RSHFT J &hm RCTRL K &hm RALT L &hm RGUI SEMI &kp SQT
+    &mt LHYP ESC &hm LGUI A &hm LALT S &hm LCTRL D &hm LSHFT F &kp G        &kp H     &hm RSHFT J &hm RCTRL K &hm RALT L &hm RGUI SEMI &kp SQT
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
     &kp BSLH  &kp Z     &kp X     &kp C     &kp V     &kp B              &kp N     &kp M     &kp COMMA &kp DOT   &kp FSLH  &hm RGUI EQUAL
 // └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                           &mo L_SYS &lt L_NAV BSPC &lt L_SYM ESC        &lt L_MED RET &lt L_NUM SPACE &mo L_FUN
+                           &mo L_SYS &hll L_NAV BSPC &lt L_SYM ESC        &lt L_MED RET &lt L_NUM SPACE &mo L_FUN
             >;
         };
 
