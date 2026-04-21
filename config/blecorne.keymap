@@ -142,11 +142,11 @@
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
     &kp BSLH  &kp Z     &kp X     &kp C     &kp V     &kp B              &kp N     &kp M     &kp COMMA &kp DOT   &kp FSLH  &hm RGUI EQUAL
 // └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                           &mo L_SYS &bspcnav L_NAV BSPC &lt L_SYM ESC        &lt L_MED RET &lt L_NUM SPACE &mo L_FUN
+                     &mo L_SYS &bspcnav L_NAV BSPC &lt L_SYM SPACE     &lt L_MED RET &lt L_NUM ESC  &mo L_FUN
             >;
         };
 
-        nav_layer {
+       nav_layer {
             display-name = "Navigation";
             bindings = <
 // ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐      ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
@@ -156,7 +156,7 @@
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
     &kp LG(TILDE)   &kp LG(Z)       &kp LG(X)      &kp LG(C)      &kp LG(V)       &kp LG(B)          &kp HOME  &kp PG_DN &kp PG_UP &kp END   &trans    &trans
 // └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                                           &trans         &kp LC(UP)     &trans             &kp RET   &kp SPACE &trans
+                                  &trans    &kp LC(UP)   &trans        &kp RET   &kp SPACE   &trans
             >;
         };
 
