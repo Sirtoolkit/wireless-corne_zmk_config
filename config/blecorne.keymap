@@ -9,6 +9,22 @@
 // Hyper + Space en una sola pulsacion
 #define LHSPC LS(LA(LC(LG(SPACE))))
 
+// Screenshots macOS
+#define MAC_SS_FULL LS(LG(N3))
+#define MAC_SS_CROP LS(LG(N4))
+
+// AeroSpace workspaces: Option + Shift + numero
+#define AER_WS_1 LS(LA(N1))
+#define AER_WS_2 LS(LA(N2))
+#define AER_WS_3 LS(LA(N3))
+#define AER_WS_4 LS(LA(N4))
+#define AER_WS_5 LS(LA(N5))
+#define AER_WS_6 LS(LA(N6))
+#define AER_WS_7 LS(LA(N7))
+#define AER_WS_8 LS(LA(N8))
+#define AER_WS_9 LS(LA(N9))
+#define AER_WS_0 LS(LA(N0))
+
 // Capas
 #define L_QWT 0
 #define L_NAV 1
@@ -18,6 +34,7 @@
 #define L_FUN 5
 #define L_SYS 6
 #define L_SFT 7
+#define L_AER 8
 
 / {
     chosen {
@@ -79,6 +96,7 @@
         combo_esc { timeout-ms = <50>; key-positions = <7 8>; bindings = <&kp ESC>; };
         combo_autoshift { timeout-ms = <50>; key-positions = <16 19>; bindings = <&tog L_SFT>; };
         combo_caps { timeout-ms = <50>; key-positions = <24 35>; bindings = <&caps_word>; };
+        combo_soft_off { timeout-ms = <100>; key-positions = <36 41>; bindings = <&soft_off>; };
 
         // --- Combos Sugeridos (Descomenta para usar) ---
         
@@ -132,7 +150,7 @@
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
     &kp BSLH  &kp Z     &kp X     &kp C     &kp V     &kp B              &kp N     &kp M     &kp COMMA &kp DOT   &kp FSLH  &hm RGUI EQUAL
 // └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                         &mo L_SYS &bspcnav L_NAV BSPC &lt L_SYM SPACE     &lt L_NUM RET &lt L_MED ESC &mo L_FUN
+                         &mo L_AER &bspcnav L_NAV BSPC &lt L_SYM SPACE     &lt L_NUM RET &lt L_MED ESC &mo L_FUN
             >;
         };
 
@@ -140,7 +158,7 @@
             display-name = "Navigation";
             bindings = <
 // ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐      ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
-    &kp LG(TAB)     &kp LG(Q)       &kp LG(W)      &kp LG(E)      &kp LG(R)       &kp LG(T)          &trans    &trans    &trans    &trans    &trans    &trans
+    &kp LG(TAB)     &kp LG(Q)       &kp LG(W)      &kp LG(E)      &kp LG(R)       &kp LG(T)          &trans    &trans    &kp MAC_SS_FULL &kp MAC_SS_CROP &trans    &trans
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
     &kp LS(LG(TAB)) &hm LCTRL LG(A) &hm LALT LG(S) &hm LGUI LG(D) &hm LSHFT LG(F) &kp LG(G)          &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT &trans    &trans
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
@@ -194,7 +212,7 @@
     &trans    &kp F11   &kp F12   &kp F13   &kp F14   &kp F15            &trans    &trans    &trans    &trans    &trans    &trans
     &trans    &kp F6    &kp F7    &kp F8    &kp F9    &kp F10            &trans    &kp RSHFT &kp RCTRL &kp RALT  &kp RGUI  &trans
     &trans    &kp F1    &kp F2    &kp F3    &kp F4    &kp F5             &trans    &trans    &trans    &trans    &trans    &trans
-                                  &trans    &trans    &trans             &trans    &trans    &trans
+                                  &trans    &mo L_SYS &trans             &trans    &trans    &trans
             >;
         };
 
@@ -202,11 +220,11 @@
             display-name = "System";
             bindings = <
 // ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐      ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
-    &bootloader &trans  &trans    &trans    &trans    &trans             &trans    &trans    &trans    &trans    &trans    &bootloader
+    &bootloader &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &trans    &trans    &trans    &trans    &trans    &bootloader
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-    &sys_reset  &trans  &trans    &trans    &trans    &trans             &trans    &trans    &trans    &trans    &trans    &sys_reset
+    &sys_reset  &bt BT_CLR &trans &trans    &trans    &trans             &trans    &trans    &trans    &trans    &trans    &sys_reset
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-    &trans      &trans  &trans    &trans    &trans    &soft_off          &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &bt BT_CLR
+    &trans      &trans  &trans    &trans    &trans    &trans             &trans    &trans    &trans    &trans    &trans    &trans
 // └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
                                   &trans    &trans    &trans             &trans    &trans    &trans
             >;
@@ -219,6 +237,20 @@
     &exit_as_esc &kp LS(A) &kp LS(S) &kp LS(D) &kp LS(F) &kp LS(G)          &kp LS(H) &kp LS(J) &kp LS(K) &kp LS(L) &kp LS(SEMI) &trans
     &trans       &kp LS(Z) &kp LS(X) &kp LS(C) &kp LS(V) &kp LS(B)          &kp LS(N) &kp LS(M) &trans    &trans    &trans    &trans
                                   &trans    &trans    &exit_as_space     &trans    &trans    &trans
+            >;
+        };
+
+        aerospace_layer {
+            display-name = "AeroSpace";
+            bindings = <
+// ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐      ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
+    &trans    &trans    &trans    &trans    &trans    &trans             &kp AER_WS_1 &kp AER_WS_2 &kp AER_WS_3 &kp AER_WS_4 &kp AER_WS_5 &trans
+// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+    &trans    &trans    &trans    &trans    &trans    &trans             &kp AER_WS_6 &kp AER_WS_7 &kp AER_WS_8 &kp AER_WS_9 &kp AER_WS_0 &trans
+// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+    &trans    &trans    &trans    &trans    &trans    &trans             &trans    &trans    &trans    &trans    &trans    &trans
+// └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
+                                  &trans    &trans    &trans             &trans    &trans    &trans
             >;
         };
     };
