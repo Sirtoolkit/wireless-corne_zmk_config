@@ -34,7 +34,6 @@
 #define L_FUN 5
 #define L_SYS 6
 #define L_SFT 7
-#define L_AER 8
 
 / {
     chosen {
@@ -150,7 +149,7 @@
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
     &kp BSLH  &kp Z     &kp X     &kp C     &kp V     &kp B              &kp N     &kp M     &kp COMMA &kp DOT   &kp FSLH  &hm RGUI EQUAL
 // └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                         &mo L_AER &bspcnav L_NAV BSPC &lt L_SYM SPACE     &lt L_NUM RET &lt L_MED ESC &mo L_FUN
+                         &kp DEL   &bspcnav L_NAV BSPC &lt L_SYM SPACE     &lt L_NUM RET &lt L_MED ESC &mo L_FUN
             >;
         };
 
@@ -160,7 +159,7 @@
 // ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐      ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
     &kp LG(TAB)     &kp LG(Q)       &kp LG(W)      &kp LG(E)      &kp LG(R)       &kp LG(T)          &trans    &trans    &kp MAC_SS_FULL &kp MAC_SS_CROP &trans    &trans
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-    &kp LS(LG(TAB)) &hm LCTRL LG(A) &hm LALT LG(S) &hm LGUI LG(D) &hm LSHFT LG(F) &kp LG(G)          &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT &trans    &trans
+    &kp LS(LG(TAB)) &hm LGUI LG(A)  &hm LALT LG(S) &hm LCTRL LG(D) &hm LSHFT LG(F) &kp LG(G)          &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT &trans    &trans
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
     &kp LG(TILDE)   &kp LG(Z)       &kp LG(X)      &kp LG(C)      &kp LG(V)       &kp LG(B)          &kp HOME  &kp PG_DN &kp PG_UP &kp END   &trans    &trans
 // └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
@@ -172,11 +171,11 @@
             display-name = "Numbers";
             bindings = <
 // ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐      ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
-    &kp TAB   &kp N1    &kp N2    &kp N3    &kp N4    &kp N5             &trans    &trans    &trans    &trans    &trans    &trans
+    &kp TAB   &kp N1    &kp N2    &kp N3    &kp N4    &kp N5             &kp AER_WS_1 &kp AER_WS_2 &kp AER_WS_3 &kp AER_WS_4 &kp AER_WS_5 &trans
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-    &kp RET   &kp N6    &kp N7    &kp N8    &kp N9    &kp N0             &trans    &kp RSHFT &kp RCTRL &kp RALT  &kp RGUI  &trans
+    &kp RET   &kp N6    &kp N7    &kp N8    &kp N9    &kp N0             &trans    &kp RSHFT  &kp RCTRL    &kp RALT     &kp RGUI     &trans
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-    &kp EQUAL &kp LPAR  &kp PLUS  &kp MINUS &kp RPAR  &kp DOT            &trans    &trans    &trans    &trans    &trans    &trans
+    &kp EQUAL &kp LPAR  &kp PLUS  &kp MINUS &kp RPAR  &kp DOT            &kp AER_WS_6 &kp AER_WS_7 &kp AER_WS_8 &kp AER_WS_9 &kp AER_WS_0 &trans
 // └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
                                   &trans   &mt DEL BSPC &kp SPACE        &trans    &trans    &trans
             >;
@@ -188,7 +187,7 @@
 // ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐      ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
     &trans    &trans    &trans    &trans    &trans    &trans             &kp AMPS  &kp LT    &kp EQUAL &kp GT    &kp PIPE  &kp HASH
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-    &trans    &kp LSHFT &kp LCTRL &kp LALT  &kp LGUI  &trans             &kp LBKT  &kp LPAR  &kp COLON &kp RPAR  &kp RBKT  &kp PRCNT
+    &trans    &kp LGUI  &kp LALT  &kp LCTRL &kp LSHFT &trans             &kp LBKT  &kp LPAR  &kp COLON &kp RPAR  &kp RBKT  &kp PRCNT
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
     &trans    &trans    &trans    &trans    &trans    &trans             &kp DLLR  &kp LBRC  &kp STAR  &kp RBRC  &kp CARET &kp EXCL
 // └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
@@ -209,7 +208,7 @@
         fun_layer {
             display-name = "Functions";
             bindings = <
-    &trans    &kp F11   &kp F12   &kp F13   &kp F14   &kp F15            &trans    &trans    &trans    &trans    &trans    &trans
+    &trans    &kp F11   &kp F12   &kp F13   &kp F14   &kp F15            &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &bt BT_CLR
     &trans    &kp F6    &kp F7    &kp F8    &kp F9    &kp F10            &trans    &kp RSHFT &kp RCTRL &kp RALT  &kp RGUI  &trans
     &trans    &kp F1    &kp F2    &kp F3    &kp F4    &kp F5             &trans    &trans    &trans    &trans    &trans    &trans
                                   &trans    &mo L_SYS &trans             &trans    &trans    &trans
@@ -220,9 +219,9 @@
             display-name = "System";
             bindings = <
 // ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐      ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
-    &bootloader &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &trans    &trans    &trans    &trans    &trans    &bootloader
+    &bootloader &trans  &trans    &trans    &trans    &trans             &trans    &trans    &trans    &trans    &trans    &trans
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-    &sys_reset  &bt BT_CLR &trans &trans    &trans    &trans             &trans    &trans    &trans    &trans    &trans    &sys_reset
+    &sys_reset  &trans  &trans    &trans    &trans    &trans             &trans    &trans    &trans    &trans    &trans    &trans
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
     &trans      &trans  &trans    &trans    &trans    &trans             &trans    &trans    &trans    &trans    &trans    &trans
 // └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
@@ -237,20 +236,6 @@
     &exit_as_esc &kp LS(A) &kp LS(S) &kp LS(D) &kp LS(F) &kp LS(G)          &kp LS(H) &kp LS(J) &kp LS(K) &kp LS(L) &kp LS(SEMI) &trans
     &trans       &kp LS(Z) &kp LS(X) &kp LS(C) &kp LS(V) &kp LS(B)          &kp LS(N) &kp LS(M) &trans    &trans    &trans    &trans
                                   &trans    &trans    &exit_as_space     &trans    &trans    &trans
-            >;
-        };
-
-        aerospace_layer {
-            display-name = "AeroSpace";
-            bindings = <
-// ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐      ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
-    &trans    &trans    &trans    &trans    &trans    &trans             &kp AER_WS_1 &kp AER_WS_2 &kp AER_WS_3 &kp AER_WS_4 &kp AER_WS_5 &trans
-// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-    &trans    &trans    &trans    &trans    &trans    &trans             &kp AER_WS_6 &kp AER_WS_7 &kp AER_WS_8 &kp AER_WS_9 &kp AER_WS_0 &trans
-// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-    &trans    &trans    &trans    &trans    &trans    &trans             &trans    &trans    &trans    &trans    &trans    &trans
-// └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                                  &trans    &trans    &trans             &trans    &trans    &trans
             >;
         };
     };
