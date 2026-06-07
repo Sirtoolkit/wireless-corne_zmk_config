@@ -11,6 +11,6 @@ manifest:
       import: app/west.yml
     - name: zmk-tri-state
       remote: dhruvinsh
-      revision: main
+      revision: ebbc1f0ccdb51669650bb0ac3e34920d09e62400  # pinned 2025-03-16
   self:
     path: config
