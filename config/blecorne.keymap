@@ -41,22 +41,27 @@
     };
 
     behaviors {
-        hm: homerow_mods {
+        hml: homerow_mod_left {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <200>;
             quick-tap-ms = <200>;
             require-prior-idle-ms = <125>;
             flavor = "balanced";
+            hold-trigger-key-positions = <6 7 8 9 10 11 18 19 20 21 22 23 30 31 32 33 34 35 36 37 38 39 40 41>;
+            hold-trigger-on-release;
             bindings = <&kp>, <&kp>;
         };
 
-        as: auto_shift {
+        hmr: homerow_mod_right {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <200>;
             quick-tap-ms = <200>;
-            flavor = "tap-preferred";
+            require-prior-idle-ms = <125>;
+            flavor = "balanced";
+            hold-trigger-key-positions = <0 1 2 3 4 5 12 13 14 15 16 17 24 25 26 27 28 29 36 37 38 39 40 41>;
+            hold-trigger-on-release;
             bindings = <&kp>, <&kp>;
         };
 
@@ -69,7 +74,7 @@
             tapping-term-ms = <200>;
             quick-tap-ms = <175>;
             bindings = <&mo>, <&kp>;
-            hold-trigger-key-positions = <6 7 8 9 10 11 18 19 20 21 22 23 30 31 32 33 34 35 36 37 38 39 40 41>;
+            hold-trigger-key-positions = <0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 38 39 40 41>;
             hold-trigger-on-release;
         };
 
@@ -104,8 +109,8 @@
         compatible = "zmk,combos";
 
         // --- Combos Activos ---
-        combo_tab { timeout-ms = <50>; key-positions = <3 4>; bindings = <&kp TAB>; };
-        combo_esc { timeout-ms = <50>; key-positions = <7 8>; bindings = <&kp ESC>; };
+        combo_tab { timeout-ms = <50>; key-positions = <3 4>; bindings = <&kp TAB>; layers = <L_QWT>; };
+        combo_esc { timeout-ms = <50>; key-positions = <7 8>; bindings = <&kp ESC>; layers = <L_QWT>; };
         combo_autoshift { timeout-ms = <50>; key-positions = <16 19>; bindings = <&tog L_SFT>; };
         combo_caps { timeout-ms = <50>; key-positions = <24 35>; bindings = <&caps_word>; };
         combo_soft_off { timeout-ms = <100>; key-positions = <36 41>; bindings = <&soft_off>; };
@@ -158,9 +163,9 @@
 // ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐      ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
     &kp TAB   &kp Q     &kp W     &kp E     &kp R     &kp T              &kp Y     &kp U     &kp I     &kp O     &kp P     &kp MINUS
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-    &kp LHSPC &hm LGUI A &hm LALT S &hm LCTRL D &hm LSHFT F &kp G       &kp H     &hm RSHFT J &hm RCTRL K &hm RALT L &hm RGUI SEMI &kp SQT
+    &kp LHSPC &hml LGUI A &hml LALT S &hml LCTRL D &hml LSHFT F &kp G       &kp H     &hmr RSHFT J &hmr RCTRL K &hmr RALT L &hmr RGUI SEMI &kp SQT
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-    &kp BSLH  &kp Z     &kp X     &kp C     &kp V     &kp B              &kp N     &kp M     &kp COMMA &kp DOT   &kp FSLH  &hm RGUI EQUAL
+    &kp BSLH  &kp Z     &kp X     &kp C     &kp V     &kp B              &kp N     &kp M     &kp COMMA &kp DOT   &kp FSLH  &hmr RGUI EQUAL
 // └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
                          &kp DEL   &bspcnav L_NAV BSPC &lt L_SYM SPACE     &lt L_NUM RET &lt L_MED ESC &mo L_FUN
             >;
@@ -172,7 +177,7 @@
 // ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐      ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
     &kp LG(TAB)     &kp LG(Q)       &kp LG(W)      &kp LG(E)      &kp LG(R)       &kp LG(T)          &swapper  &kp LS(TAB) &kp MAC_SS_FULL &kp MAC_SS_CROP &trans    &trans
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-    &kp LS(LG(TAB)) &hm LGUI LG(A)  &hm LALT LG(S) &hm LCTRL LG(D) &hm LSHFT LG(F) &kp LG(G)          &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT &trans    &trans
+    &kp LS(LG(TAB)) &hml LGUI LG(A)  &hml LALT LG(S) &hml LCTRL LG(D) &hml LSHFT LG(F) &kp LG(G)          &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT &trans    &trans
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
     &kp LG(TILDE)   &kp LG(Z)       &kp LG(X)      &kp LG(C)      &kp LG(V)       &kp LG(B)          &kp HOME  &kp PG_DN &kp PG_UP &kp END   &trans    &trans
 // └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
