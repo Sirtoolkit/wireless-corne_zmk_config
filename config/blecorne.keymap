@@ -72,6 +72,19 @@
             hold-trigger-key-positions = <6 7 8 9 10 11 18 19 20 21 22 23 30 31 32 33 34 35 36 37 38 39 40 41>;
             hold-trigger-on-release;
         };
+
+        // Swapper (tri-state): Cmd+Tab que NO suelta Cmd entre toques, asi cicla
+        // por TODAS las apps. Toca para empezar/avanzar; la tecla de al lado (pos 7)
+        // = Shift+Tab para retroceder sin confirmar. Al soltar el pulgar de NAV
+        // se vuelve a la capa base y se confirma la app (Cmd se suelta).
+        // Windows/Linux: cambia LGUI -> LALT en las dos posiciones de "bindings".
+        swapper: swapper {
+            compatible = "zmk,behavior-tri-state";
+            #binding-cells = <0>;
+            bindings = <&kt LGUI>, <&kp TAB>, <&kt LGUI>;
+            ignored-key-positions = <7>;
+            ignored-layers = <L_NAV>;
+        };
     };
 
     macros {
@@ -157,7 +170,7 @@
             display-name = "Navigation";
             bindings = <
 // ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐      ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
-    &kp LG(TAB)     &kp LG(Q)       &kp LG(W)      &kp LG(E)      &kp LG(R)       &kp LG(T)          &trans    &trans    &kp MAC_SS_FULL &kp MAC_SS_CROP &trans    &trans
+    &kp LG(TAB)     &kp LG(Q)       &kp LG(W)      &kp LG(E)      &kp LG(R)       &kp LG(T)          &swapper  &kp LS(TAB) &kp MAC_SS_FULL &kp MAC_SS_CROP &trans    &trans
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
     &kp LS(LG(TAB)) &hm LGUI LG(A)  &hm LALT LG(S) &hm LCTRL LG(D) &hm LSHFT LG(F) &kp LG(G)          &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT &trans    &trans
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
