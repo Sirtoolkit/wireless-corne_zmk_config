@@ -9,17 +9,17 @@
 #define MAC_SS_FULL LS(LG(N3))
 #define MAC_SS_CROP LS(LG(N4))
 
-// AeroSpace workspaces: Option + Shift + numero
-#define AER_WS_1 LS(LA(N1))
-#define AER_WS_2 LS(LA(N2))
-#define AER_WS_3 LS(LA(N3))
-#define AER_WS_4 LS(LA(N4))
-#define AER_WS_5 LS(LA(N5))
-#define AER_WS_6 LS(LA(N6))
-#define AER_WS_7 LS(LA(N7))
-#define AER_WS_8 LS(LA(N8))
-#define AER_WS_9 LS(LA(N9))
-#define AER_WS_0 LS(LA(N0))
+// Neru / Leader Key global modes: Cmd + Shift + tecla
+#define NERU_HINT LS(LG(SPACE))
+#define NERU_GRID LS(LG(G))
+#define NERU_RECUR LS(LG(E))
+#define NERU_SCROLL LS(LG(S))
+
+
+// Ceryon: navegacion de tabs/workspaces que si uso.
+#define CER_TAB_NEXT LC(TAB)
+#define CER_WS_PREV LA(LG(LEFT))
+#define CER_WS_NEXT LA(LG(RIGHT))
 
 // Capas
 #define L_QWT 0
@@ -104,7 +104,6 @@
         combo_tab { timeout-ms = <50>; key-positions = <3 4>; bindings = <&kp TAB>; layers = <L_QWT>; };
         combo_esc { timeout-ms = <50>; key-positions = <7 8>; bindings = <&kp ESC>; layers = <L_QWT>; };
         combo_caps { timeout-ms = <50>; key-positions = <24 35>; bindings = <&caps_word>; };
-        combo_soft_off { timeout-ms = <100>; key-positions = <36 41>; bindings = <&soft_off>; };
 
         // --- Combos Sugeridos (Descomenta para usar) ---
         
@@ -164,27 +163,32 @@
 
        nav_layer {
             display-name = "Navigation";
+            // NAV global: navegacion segura + acciones frecuentes.
+            // AeroSpace usa NUM + Option/Shift + numeros; Herdr usa FUN F8-F11.
             bindings = <
 // ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐      ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
-    &kp LG(TAB)     &kp LG(Q)       &kp LG(W)      &kp LG(E)      &kp LG(R)       &kp LG(T)          &swapper  &kp LS(TAB) &kp MAC_SS_FULL &kp MAC_SS_CROP &trans    &trans
+    &kp LG(TAB)     &kp LG(TILDE)    &kp CER_WS_PREV &kp CER_WS_NEXT &none       &kp CER_TAB_NEXT     &swapper  &kp LS(TAB) &kp NERU_HINT &kp NERU_GRID &kp MAC_SS_FULL &kp MAC_SS_CROP
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-    &kp LS(LG(TAB)) &hml LGUI LG(A)  &hml LALT LG(S) &hml LCTRL LG(D) &hml LSHFT LG(F) &kp LG(G)          &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT &trans    &trans
+    &kp LS(LG(TAB)) &kp LGUI         &kp LALT        &kp LCTRL       &kp LSHFT    &none               &kp LEFT  &kp DOWN    &kp UP        &kp RIGHT     &kp NERU_RECUR &kp NERU_SCROLL
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-    &kp LG(TILDE)   &kp LG(Z)       &kp LG(X)      &kp LG(C)      &kp LG(V)       &kp LG(B)          &kp HOME  &kp PG_DN &kp PG_UP &kp END   &trans    &trans
+    &trans          &trans           &trans          &trans         &trans       &none               &kp HOME  &kp PG_DN   &kp PG_UP     &kp END       &trans         &trans
 // └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                                  &trans    &kp LC(UP)   &trans        &kp RET   &kp SPACE   &trans
+                                  &none    &kp LC(UP)   &none        &none     &none     &none
             >;
         };
+
+
+
 
         num_layer {
             display-name = "Numbers";
             bindings = <
 // ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐      ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
-    &kp TAB   &kp N1    &kp N2    &kp N3    &kp N4    &kp N5             &kp AER_WS_1 &kp AER_WS_2 &kp AER_WS_3 &kp AER_WS_4 &kp AER_WS_5 &trans
+    &kp TAB   &kp N1    &kp N2    &kp N3    &kp N4    &kp N5             &none    &none    &none    &none    &none    &none
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
     &kp RET   &kp N6    &kp N7    &kp N8    &kp N9    &kp N0             &trans    &kp RSHFT  &kp RCTRL    &kp RALT     &kp RGUI     &trans
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-    &kp EQUAL &kp LPAR  &kp PLUS  &kp MINUS &kp RPAR  &kp DOT            &kp AER_WS_6 &kp AER_WS_7 &kp AER_WS_8 &kp AER_WS_9 &kp AER_WS_0 &trans
+    &kp EQUAL &kp LPAR  &kp PLUS  &kp MINUS &kp RPAR  &kp DOT            &none    &none    &none    &none    &none    &none
 // └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
                                   &trans   &bsdel DEL BSPC &kp SPACE        &trans    &trans    &trans
             >;
@@ -217,7 +221,7 @@
         fun_layer {
             display-name = "Functions";
             bindings = <
-    &trans    &kp F1    &kp F2    &kp F3    &kp F4    &kp F5             &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &bt BT_CLR
+    &trans    &kp F1    &kp F2    &kp F3    &kp F4    &kp F5             &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &trans
     &trans    &kp F6    &kp F7    &kp F8    &kp F9    &kp F10            &trans    &kp RSHFT &kp RCTRL &kp RALT  &kp RGUI  &trans
     &trans    &kp F11   &kp F12   &trans    &trans    &trans             &trans    &trans    &trans    &trans    &trans    &trans
                                   &trans    &mo L_SYS &trans             &trans    &trans    &trans
@@ -228,11 +232,11 @@
             display-name = "System";
             bindings = <
 // ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐      ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
-    &bootloader &trans  &trans    &trans    &trans    &trans             &trans    &trans    &trans    &trans    &trans    &trans
+    &bootloader &trans  &trans    &trans    &trans    &trans             &trans    &trans    &trans    &trans    &trans    &bt BT_CLR
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
     &sys_reset  &trans  &trans    &trans    &trans    &trans             &trans    &trans    &trans    &trans    &trans    &trans
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-    &trans      &trans  &trans    &trans    &trans    &trans             &trans    &trans    &trans    &trans    &trans    &trans
+    &soft_off   &trans  &trans    &trans    &trans    &trans             &trans    &trans    &trans    &trans    &trans    &trans
 // └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤      ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
                                   &trans    &trans    &trans             &trans    &trans    &trans
             >;
